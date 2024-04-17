@@ -69,3 +69,10 @@ model Event {
 
   @@map("events")
 }
+
+model Authentication {
+  id    Int    @id @default(autoincrement())
+  token String @db.Text
+
+  @@map("authentications")
+}

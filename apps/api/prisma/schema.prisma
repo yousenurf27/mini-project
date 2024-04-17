@@ -32,6 +32,7 @@ model User {
   roleId    Int
   role      Role      @relation(fields: [roleId], references: [id])
   vouchers  Voucher[]
+  events    Event[]
 
   @@map("users")
 }
@@ -54,4 +55,17 @@ model Voucher {
   user      User     @relation(fields: [userId], references: [id])
 
   @@map("vouchers")
+}
+
+model Event {
+  id                String   @id @db.VarChar(100)
+  eventName         String   @db.Text
+  eventDesc         String   @db.Text
+  eventStart        DateTime
+  eventLastRegister DateTime
+  eventAttendee     Int
+  userId            String   @db.VarChar(100)
+  user              User     @relation(fields: [userId], references: [id])
+
+  @@map("events")
 }

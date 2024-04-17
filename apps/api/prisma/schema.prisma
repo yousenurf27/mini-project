@@ -48,14 +48,14 @@ model Voucher {
 }
 
 model Event {
-  id                String   @id @db.VarChar(100)
-  eventName         String   @db.Text
-  eventDesc         String   @db.Text
-  eventStart        DateTime
-  eventLastRegister DateTime
-  eventAttendee     Int
-  userId            String   @db.VarChar(100)
-  user              User     @relation(fields: [userId], references: [id])
+  id           String   @id @db.VarChar(100)
+  name         String   @db.Text
+  desc         String   @db.Text
+  start        DateTime
+  lastRegister DateTime
+  attendee     Int
+  userId       String   @db.VarChar(100)
+  user         User     @relation(fields: [userId], references: [id])
 
   @@map("events")
 }

@@ -16,7 +16,8 @@ describe('POST /users/register', () => {
           firstName: "",
           lastName: "",
           email: "",
-          password: ""
+          password: "",
+          roleId: ""
         });
 
     expect(response.status).toBe(400);
@@ -29,7 +30,8 @@ describe('POST /users/register', () => {
       firstName: "test",
       lastName: "test",
       email: "test@gmail.com",
-      password: "test"
+      password: "test",
+      roleId: "1"
     }
     const response = await supertest(app.app)
         .post('/users/register')

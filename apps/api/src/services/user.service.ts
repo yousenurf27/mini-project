@@ -19,9 +19,9 @@ export class UserService {
 
     req.id = `user-${uuid()}`;
     req.password = await bcrypt.hash(req.password, 10);
-    req.referral = referralCode(6);
     req.updatedAt = new Date().toISOString();
-    req.roleId = 1;
+    req.roleId = +req.roleId
+    req.roleId == 1 ? req.referral = referralCode(6) : '';
 
     const user = await prisma.user.create({
       data: req

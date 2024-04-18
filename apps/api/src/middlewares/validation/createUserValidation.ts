@@ -7,6 +7,7 @@ export const validateUserData = [
   body('lastName').trim().notEmpty().withMessage('Last Name is required'),
   body('email').trim().isEmail().notEmpty().withMessage('Email is required'),
   body('password').trim().notEmpty().withMessage('Password is required'),
+  body('roleId').trim().notEmpty().withMessage('Role is required'),
 
   (req: Request, res: Response, next: NextFunction) => {
     const errors = validationResult(req);

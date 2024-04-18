@@ -34,10 +34,14 @@ export default class App {
       (err: Error, req: Request, res: Response, next: NextFunction) => {
         if (err instanceof ClientError) {
           res.status(err.statusCode).send({
+            status: 'fail',
             message: err.message
           });
         } else {
-          res.status(500).send('Internal server error!');
+          res.status(500).send({
+            status: 'fail',
+            message: 'Internal server error!'
+          });
         }
       },
     );

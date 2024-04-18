@@ -21,7 +21,8 @@ describe('POST /users/register', () => {
         });
 
     expect(response.status).toBe(400);
-    expect(response.body.errors).toBeDefined();
+    expect(response.body.status).toBe('fail');
+    expect(response.body.message).toBeDefined();
   })
 
   it('should register user correctly', async () => {
@@ -38,6 +39,7 @@ describe('POST /users/register', () => {
         .send(request);
 
     expect(response.status).toBe(201);
+    expect(response.body.status).toBe('success');
     expect(response.body.data.id).toBeDefined();
     expect(response.body.data.id.length).not.toBe(0);
     expect(response.body.data.firstName).toBe(request.firstName);
@@ -51,13 +53,15 @@ describe('POST /users/register', () => {
       firstName: "test",
       lastName: "test",
       email: "test@gmail.com",
-      password: "test"
+      password: "test",
+      roleId: "2"
     }
     const response = await supertest(app.app)
         .post('/users/register')
         .send(request);
 
     expect(response.status).toBe(400);
+    expect(response.body.status).toBe('fail');
     expect(response.body.message).toBe('Email already exists!');
   })
 

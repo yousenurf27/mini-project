@@ -10,6 +10,7 @@ export default class UserController {
       const response = await UserService.addUser(request);
   
       res.status(201).send({
+        status: 'success',
         data: response
       });
     } catch (e) {

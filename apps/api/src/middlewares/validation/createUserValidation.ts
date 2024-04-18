@@ -12,7 +12,10 @@ export const validateUserData = [
   (req: Request, res: Response, next: NextFunction) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
-      return res.status(400).send({ errors: errors.array() })
+      return res.status(400).send({
+        status: 'fail',
+        message: errors.array()
+      })
     }
     next();
   }

@@ -9,6 +9,8 @@ import express, {
 } from 'express';
 import cors from 'cors';
 import { PORT } from './config';
+import UserRouter from './routers/user.router';
+import ClientError from './exceptions/ClientError';
 
 export default class App {
   private app: Express;
@@ -27,33 +29,26 @@ export default class App {
   }
 
   private handleError(): void {
-    // not found
-    this.app.use((req: Request, res: Response, next: NextFunction) => {
-      if (req.path.includes('/api/')) {
-        res.status(404).send('Not found !');
-      } else {
-        next();
-      }
-    });
-
     // error
     this.app.use(
-      (err: Error, req: Request, res: Response, next: NextFunction) => {
-        if (req.path.includes('/api/')) {
-          console.error('Error : ', err.stack);
-          res.status(500).send('Error !');
+      (err: Error, req: Request, res: Response) => {
+        if (err instanceof ClientError) {
+          res.status(err.statusCode).send(err.message);
         } else {
-          next();
+          res.status(500).send('Internal server error!');
         }
       },
     );
   }
 
   private routes(): void {
+    const userRouter = new UserRouter();
+
     this.app.get('/', (req: Request, res: Response) => {
       res.send(`Hello, Purwadhika Student !`);
     });
 
+    this.app.use('/user', userRouter.getRouter());
   }
 
   public start(): void {

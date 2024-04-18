@@ -31,7 +31,7 @@ export default class App {
   private handleError(): void {
     // error
     this.app.use(
-      (err: Error, req: Request, res: Response) => {
+      (err: Error, req: Request, res: Response, next: NextFunction) => {
         if (err instanceof ClientError) {
           res.status(err.statusCode).send(err.message);
         } else {

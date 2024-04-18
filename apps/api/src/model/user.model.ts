@@ -6,7 +6,7 @@ export type CreateUserRquest = {
   lastName: string;
   email: string;
   password: string;
-  referral: string;
+  referral?: string;
   updatedAt: string;
   roleId: number;
 }

@@ -13,7 +13,7 @@ import UserRouter from './routers/user.router';
 import ClientError from './exceptions/ClientError';
 
 export default class App {
-  private app: Express;
+  public app: Express;
 
   constructor() {
     this.app = express();
@@ -33,7 +33,9 @@ export default class App {
     this.app.use(
       (err: Error, req: Request, res: Response, next: NextFunction) => {
         if (err instanceof ClientError) {
-          res.status(err.statusCode).send(err.message);
+          res.status(err.statusCode).send({
+            message: err.message
+          });
         } else {
           res.status(500).send('Internal server error!');
         }
@@ -48,7 +50,7 @@ export default class App {
       res.send(`Hello, Purwadhika Student !`);
     });
 
-    this.app.use('/user', userRouter.getRouter());
+    this.app.use('/users', userRouter.getRouter());
   }
 
   public start(): void {

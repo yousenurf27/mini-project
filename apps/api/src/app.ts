@@ -37,6 +37,11 @@ export default class App {
             status: 'fail',
             message: err.message
           });
+        } else if ( err instanceof Error ) {
+          res.status(400).send({
+            status: 'fail',
+            message: err.message
+          });
         } else {
           res.status(500).send({
             status: 'fail',

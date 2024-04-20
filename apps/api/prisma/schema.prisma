@@ -23,6 +23,7 @@ model User {
   role      Role      @relation(fields: [roleId], references: [id])
   vouchers  Voucher[]
   events    Event[]
+  token     String?   @db.Text
 
   @@map("users")
 }
@@ -58,11 +59,4 @@ model Event {
   user         User     @relation(fields: [userId], references: [id])
 
   @@map("events")
-}
-
-model Authentication {
-  id    Int    @id @default(autoincrement())
-  token String @db.Text
-
-  @@map("authentications")
 }

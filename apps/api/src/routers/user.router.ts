@@ -1,5 +1,5 @@
 import UserController from '@/controllers/user.controller';
-import { validateUserData } from '@/middlewares/validation/createUserValidation';
+import { validateCreateUserData } from '@/middlewares/validation/userValidation';
 import { Router } from 'express';
 
 export default class UserRouter {
@@ -14,8 +14,8 @@ export default class UserRouter {
 
   private initializationRoutes(): void {
     this.router.post(
-      '/register',
-      validateUserData,
+      '/',
+      validateCreateUserData,
       this.userController.postUser
     );
   }

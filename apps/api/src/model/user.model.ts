@@ -16,6 +16,7 @@ export type UserResponse = {
   firstName: string;
   lastName: string;
   email: string;
+  role?: string;
   token?: string;
 }
 
@@ -26,4 +27,14 @@ export const toUserReponse = (user : User) : UserResponse => {
     lastName: user.lastName,
     email: user.email,
   }
+}
+
+export type LoginUserRequest = {
+  email: string;
+  password: string;
+}
+
+export type UpdateUserRequest = {
+  id: string;
+  token?: string;
 }

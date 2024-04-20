@@ -1,17 +1,18 @@
 import supertest from 'supertest'
-import { UserTestHelper } from './test.util'
+import { UserTestHelper } from './utils/userTestHelper'
 import App from '@/app'
 
-describe('POST /users/register', () => {
+const app = new App();
+
+describe('POST /users/', () => {
   
-  afterAll(async () => {
+  afterAll(async() => {
     await UserTestHelper.delete();
   })
   
   it('should reject register new user if request is invalid', async () => {
-    const app = new App();
     const response = await supertest(app.app)
-        .post('/users/register')
+        .post('/users/')
         .send({
           firstName: "",
           lastName: "",
@@ -22,11 +23,10 @@ describe('POST /users/register', () => {
 
     expect(response.status).toBe(400);
     expect(response.body.status).toBe('fail');
-    expect(response.body.message).toBeDefined();
+    expect(typeof response.body.message).toBe('object');
   })
 
   it('should register user correctly', async () => {
-    const app = new App();
     const request = {
       firstName: "test",
       lastName: "test",
@@ -35,7 +35,7 @@ describe('POST /users/register', () => {
       roleId: "1"
     }
     const response = await supertest(app.app)
-        .post('/users/register')
+        .post('/users/')
         .send(request);
 
     expect(response.status).toBe(201);
@@ -48,7 +48,6 @@ describe('POST /users/register', () => {
   })
 
   it('should reject register new user if email already exists', async () => {
-    const app = new App();
     const request = {
       firstName: "test",
       lastName: "test",
@@ -57,7 +56,7 @@ describe('POST /users/register', () => {
       roleId: "2"
     }
     const response = await supertest(app.app)
-        .post('/users/register')
+        .post('/users/')
         .send(request);
 
     expect(response.status).toBe(400);

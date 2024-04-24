@@ -3,14 +3,14 @@
 @tailwind utilities;
 
 
-@media screen and (min-width: 600px) {
+@media screen and (min-width: 769px) {
   main {
     margin-top: 66px;
   }
 }
 
-@media screen and (max-width: 599px) {
+@media screen and (max-width: 768px) {
   main {
-    margin-top: 62px;
+    margin-top: 60px;
   }
 }

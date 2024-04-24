@@ -47,7 +47,7 @@ const MenuMob = () => {
         </svg>
       </motion.button>
       <motion.div
-        className= 'w-full max-w-xs pt-16 fixed top-0 bottom-0 bg-white z-10 drop-shadow-md shadow-slate-800'
+        className= 'w-full max-w-xs pt-16 fixed top-0 bottom-0 bg-white z-10 shadow-medium shadow-slate-800'
         variants={{
           closed: { right: '-100%', },
           open: { right: '0%',  }
@@ -72,17 +72,17 @@ const MenuMob = () => {
               className='mx-10 flex-grow bg-transparent transition-all focus:bg-emerald-500 text-emerald-700 font-semibold focus:text-white py-2 px-4 border border-emerald-500 focus:border-transparent rounded-full'
               whileTap={{ scale: .7 }}
             >
-              Login
+              Log In
             </motion.button>
           </Link>
-          <Link className='flex' href='/register'
+          <Link className='flex' href='/signup'
             onClick={() => toggleOpen()}
           >
             <motion.button
               className='mx-10 flex-grow transition-all bg-emerald-500 hover:bg-emerald-700 text-white font-bold py-2 px-4 rounded-full'
               whileTap={{ scale: .7 }}
             >
-              Register
+              Sign Up
             </motion.button>
           </Link>
         </div>

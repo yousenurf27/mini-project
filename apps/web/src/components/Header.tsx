@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import MenuDesk from './MenuDesk';
 import MenuMob from './MenuMob';
-import DropdownMenu from './DropdownMenu';
+import UserMenu from './ui/UserMenu';
 
 const Header = () => {
   const [ width, setWidth ] = useState<number>(0);
@@ -20,13 +20,13 @@ const Header = () => {
   return (
     <div className='fixed top-0 left-0 right-0 bg-white'>
       <div className='container mx-auto py-3 px-4 flex justify-between items-center'>
-        {/* {width < 767 && <DropdownMenu />} */}
+        {/* {width < 767 && <UserMenu />} */}
         <div className='h-fit'>
           <Link className='cursor-pointer' href='/'>
             <h1 className='font-bold text-3xl'><span className='text-emerald-500'>X</span> Events</h1>
           </Link>
         </div>
-        <div className='flex justify-between items-baseline'>
+        <div className='flex justify-between items-center'>
           {width > 767 ? (
             <MenuDesk props={width} />
           ) : (

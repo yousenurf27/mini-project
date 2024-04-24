@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion'
 import Link from 'next/link'
-import DropdownMenu from './DropdownMenu'
+import UserMenu from './ui/UserMenu'
 
 const MenuDesk = ({ props }: { props: number }) => {
   return (
@@ -14,7 +14,7 @@ const MenuDesk = ({ props }: { props: number }) => {
           <a className='block py-1 text-lg hover:text-emerald-500' href="#">Events</a>
         </motion.li>
       </ul>
-      {/* {props > 767 && <DropdownMenu />} */}
+      {/* {props > 767 && <UserMenu />} */}
       <Link href='/login'>
         <motion.button
           className='ml-2 bg-transparent transition-all hover:bg-emerald-500 text-emerald-700 font-semibold hover:text-white py-2 px-4 border border-emerald-500 hover:border-transparent rounded-full'

@@ -4,7 +4,8 @@ import {
   LoginUserRequest,
   UpdateUserRequest,
   UserResponse,
-  toUserReponse 
+  toUserAdminResponse,
+  toUserResponse 
 } from '@/model/user.model';
 import prisma from '@/prisma';
 import { referralCode } from '@/utils/referralCode';
@@ -34,7 +35,11 @@ export class UserService {
       data: req
     })
 
-    return toUserReponse(user);
+    if (user.referral) {
+      return toUserResponse(user)
+    } else {
+      return toUserAdminResponse(user)
+    }
 
   }
 
@@ -69,7 +74,7 @@ export class UserService {
       data: { token: req.token }
     })
 
-    const newUser = toUserReponse(user);
+    const newUser = toUserResponse(user);
 
     return newUser;
 

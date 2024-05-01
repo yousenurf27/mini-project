@@ -1,13 +1,11 @@
 import { User } from '@prisma/client';
 
 export type CreateUserRquest = {
-  id: string,
   firstName: string;
   lastName: string;
   email: string;
   password: string;
-  referral?: string;
-  updatedAt: string;
+  refReferral?: string;
   roleId: number;
 }
 
@@ -16,11 +14,22 @@ export type UserResponse = {
   firstName: string;
   lastName: string;
   email: string;
+  referral?: string;
   role?: string;
   token?: string;
 }
 
-export const toUserReponse = (user : User) : UserResponse => {
+export const toUserResponse = (user : User) : UserResponse => {
+  return {
+    id: user.id,
+    firstName: user.firstName,
+    lastName: user.lastName,
+    email: user.email,
+    referral: user.referral!,
+  }
+}
+
+export const toUserAdminResponse = (user : User) : UserResponse => {
   return {
     id: user.id,
     firstName: user.firstName,

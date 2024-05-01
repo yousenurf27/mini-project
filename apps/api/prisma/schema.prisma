@@ -16,7 +16,7 @@ model User {
   lastName  String    @db.VarChar(50)
   email     String    @unique @db.VarChar(100)
   password  String    @db.VarChar(100)
-  referral  String?   @db.VarChar(50)
+  referral  String?   @unique @db.VarChar(50)
   createdAt DateTime  @default(now())
   updatedAt DateTime  @updatedAt
   roleId    Int
@@ -39,9 +39,12 @@ model Role {
 model Voucher {
   id        String   @id @db.VarChar(100)
   name      String   @db.VarChar(50)
-  points    Int
+  type      String   @db.VarChar(50)
+  points    Int?
+  discount  Int?
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+  expAt     DateTime
   userId    String   @db.VarChar(100)
   user      User     @relation(fields: [userId], references: [id])
 

@@ -17,7 +17,7 @@ const MenuDesk = ({ props }: { props: number }) => {
       {/* {props > 767 && <UserMenu />} */}
       <Link href='/login'>
         <motion.button
-          className='ml-2 bg-transparent transition-all hover:bg-emerald-500 text-emerald-700 font-semibold hover:text-white py-2 px-4 border border-emerald-500 hover:border-transparent rounded-full'
+          className='ml-2 bg-transparent transition-all hover:bg-emerald-500 text-emerald-700 font-semibold hover:text-white py-2 px-4 border border-emerald-500 hover:border-transparent rounded-xl'
           whileTap={{ scale: .7 }}
         >
           Log In
@@ -25,7 +25,7 @@ const MenuDesk = ({ props }: { props: number }) => {
       </Link>
       <Link href='/signup'>
         <motion.button
-          className='ml-2 transition-all bg-emerald-500 hover:bg-emerald-700 text-white font-bold py-2 px-4 rounded-full'
+          className='ml-2 transition-all bg-emerald-500 hover:bg-emerald-700 text-white font-bold py-2 px-4 rounded-xl'
           whileTap={{ scale: .7 }}
         >
           Sign Up

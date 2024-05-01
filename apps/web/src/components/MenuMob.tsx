@@ -69,7 +69,7 @@ const MenuMob = () => {
             onClick={() => toggleOpen()}
           >
             <motion.button
-              className='mx-10 flex-grow bg-transparent transition-all focus:bg-emerald-500 text-emerald-700 font-semibold focus:text-white py-2 px-4 border border-emerald-500 focus:border-transparent rounded-full'
+              className='mx-10 flex-grow bg-transparent transition-all focus:bg-emerald-500 text-emerald-700 font-semibold focus:text-white py-2 px-4 border border-emerald-500 focus:border-transparent rounded-xl'
               whileTap={{ scale: .7 }}
             >
               Log In
@@ -79,7 +79,7 @@ const MenuMob = () => {
             onClick={() => toggleOpen()}
           >
             <motion.button
-              className='mx-10 flex-grow transition-all bg-emerald-500 hover:bg-emerald-700 text-white font-bold py-2 px-4 rounded-full'
+              className='mx-10 flex-grow transition-all bg-emerald-500 hover:bg-emerald-700 text-white font-bold py-2 px-4 rounded-xl'
               whileTap={{ scale: .7 }}
             >
               Sign Up

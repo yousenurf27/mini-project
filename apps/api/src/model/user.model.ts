@@ -1,13 +1,11 @@
 import { User } from '@prisma/client';
 
 export type CreateUserRquest = {
-  id: string,
   firstName: string;
   lastName: string;
   email: string;
   password: string;
-  referral?: string;
-  updatedAt: string;
+  refReferral?: string;
   roleId: number;
 }
 

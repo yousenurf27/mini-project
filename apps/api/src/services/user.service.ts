@@ -1,4 +1,5 @@
 import InvariantError from '@/exceptions/InvariantError';
+import NotFoundError from '@/exceptions/NotFoundError';
 import {
   CreateUserRquest,
   LoginUserRequest,
@@ -25,14 +26,21 @@ export class UserService {
       throw new InvariantError('Email already exists!');
     }
 
-    req.id = `user-${uuid()}`;
     req.password = await bcrypt.hash(req.password, 10);
-    req.updatedAt = new Date().toISOString();
     req.roleId = +req.roleId
-    req.roleId == 1 ? req.referral = referralCode(6) : '';
+    const referral = req.roleId == 1 ? referralCode(6) : '';
 
     const user = await prisma.user.create({
-      data: req
+      data: {
+        id: `user-${uuid()}`,
+        firstName: req.firstName,
+        lastName: req.lastName,
+        email: req.email,
+        password: req.password,
+        referral: referral,
+        updatedAt: new Date().toISOString(),
+        roleId: req.roleId
+      }
     })
 
     if (user.referral) {
@@ -90,6 +98,32 @@ export class UserService {
         token: null
       }
     })
+
+  }
+
+  static async getUserIdByReferral(req: { referral: string }) : Promise<{ id: string }> {
+    
+    const user = await prisma.user.findUnique({
+      where: { 
+        referral: req.referral
+       }
+    })
+
+    return { id: user!.id }
+
+  }
+
+  static async verifyReferral(req: { referral: string }) : Promise<void> {
+    
+    const isReferralValid = await prisma.user.findUnique({
+      where: { 
+        referral: req.referral
+       }
+    })
+
+    if(!isReferralValid) {
+      throw new NotFoundError('Referral not found');
+    }
 
   }
 

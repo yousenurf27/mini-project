@@ -4,7 +4,7 @@ import App from '@/app'
 
 const app = new App();
 
-describe('POST /auth/', () => {
+describe('POST /api/auth/', () => {
 
   beforeAll(async() => {
     await UserTestHelper.add();
@@ -21,7 +21,7 @@ describe('POST /auth/', () => {
     }
     
     const response = await supertest(app.app)
-        .post('/auth/')
+        .post('/api/auth/')
         .send(request);
 
     expect(response.status).toBe(200);
@@ -41,7 +41,7 @@ describe('POST /auth/', () => {
       password: ''
     }
     const response = await supertest(app.app)
-        .post('/auth/')
+        .post('/api/auth/')
         .send(request);
 
     expect(response.status).toBe(400);
@@ -55,7 +55,7 @@ describe('POST /auth/', () => {
       password: 'secret'
     }
     const response = await supertest(app.app)
-        .post('/auth/')
+        .post('/api/auth/')
         .send(request);
 
     expect(response.status).toBe(400);
@@ -69,7 +69,7 @@ describe('POST /auth/', () => {
       password: 'secre'
     }
     const response = await supertest(app.app)
-        .post('/auth/')
+        .post('/api/auth/')
         .send(request);
 
     expect(response.status).toBe(400);
@@ -79,7 +79,7 @@ describe('POST /auth/', () => {
 
 })
 
-describe('DELETE /auth/', () => {
+describe('DELETE /api/auth/', () => {
 
   afterAll(async() => {
     await UserTestHelper.delete();
@@ -95,11 +95,11 @@ describe('DELETE /auth/', () => {
       password: 'secret'
     }
     const auth = await supertest(app.app)
-        .post('/auth/')
+        .post('/api/auth/')
         .send(requestLogin)
     
     const response = await supertest(app.app)
-        .delete('/auth/')
+        .delete('/api/auth/')
         .set('token', 'Bearer ' + auth.body.data.token)
 
     expect(response.status).toBe(200);
@@ -112,7 +112,7 @@ describe('DELETE /auth/', () => {
 
   it('should throw error, token invalid', async () => {
     const response = await supertest(app.app)
-        .delete('/auth/')
+        .delete('/api/auth/')
         .set('token', 'Bearer ' + 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6InVzZXItdXVpZHY0Iiwicm9sZSI6InVzZXIiLCJpYXQiOjE3MTM1ODYwMzEsImV4cCI6MTcxMzU4NjA5MX0.WJfQGVyqguQGSxJZCUbkbW6aPbpS_CDrjLdGvJuPe3U')
 
     expect(response.status).toBe(403);
@@ -122,7 +122,7 @@ describe('DELETE /auth/', () => {
 
   it('should throw error unauthorized, token null', async () => {
     const response = await supertest(app.app)
-        .delete('/auth/')
+        .delete('/api/auth/')
         .set('token', 'Bearer ' + '')
 
     expect(response.status).toBe(401);

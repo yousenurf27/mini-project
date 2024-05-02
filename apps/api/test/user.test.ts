@@ -5,7 +5,7 @@ import { VoucherTestHelper } from './utils/voucherTestHelper';
 
 const app = new App();
 
-describe('POST /users/', () => {
+describe('POST /api/users/', () => {
   
   afterEach(async() => {
     await VoucherTestHelper.delete();
@@ -14,7 +14,7 @@ describe('POST /users/', () => {
   
   it('should reject register new user if request is invalid', async () => {
     const response = await supertest(app.app)
-        .post('/users/')
+        .post('/api/users/')
         .send({
           firstName: "",
           lastName: "",
@@ -30,7 +30,7 @@ describe('POST /users/', () => {
 
   it('should reject register new user when refReferral is invalid', async () => {
     const response = await supertest(app.app)
-        .post('/users/')
+        .post('/api/users/')
         .send({
           firstName: "test",
           lastName: "test",
@@ -54,7 +54,7 @@ describe('POST /users/', () => {
       roleId: "1"
     }
     const response = await supertest(app.app)
-        .post('/users/')
+        .post('/api/users/')
         .send(request);
 
     expect(response.status).toBe(201);
@@ -77,7 +77,7 @@ describe('POST /users/', () => {
       roleId: "2"
     }
     await supertest(app.app)
-      .post('/users/')
+      .post('/api/users/')
       .send(request);
 
     const request2 = {
@@ -88,7 +88,7 @@ describe('POST /users/', () => {
       roleId: "2"
     }
     const response2 = await supertest(app.app)
-        .post('/users/')
+        .post('/api/users/')
         .send(request2);
 
     expect(response2.status).toBe(400);
@@ -105,7 +105,7 @@ describe('POST /users/', () => {
       roleId: "2"
     }
     const response = await supertest(app.app)
-        .post('/users/')
+        .post('/api/users/')
         .send(request);
 
     expect(response.status).toBe(201);
@@ -127,7 +127,7 @@ describe('POST /users/', () => {
       roleId: "1"
     }
     const response = await supertest(app.app)
-        .post('/users/')
+        .post('/api/users/')
         .send(request);
 
     const request2 = {
@@ -139,7 +139,7 @@ describe('POST /users/', () => {
       refReferral: response.body.data.referral
     }
     const response2 = await supertest(app.app)
-        .post('/users/')
+        .post('/api/users/')
         .send(request2);
 
     const voucherUser1 = await VoucherTestHelper.getByUserId(response.body.data.id)
@@ -162,7 +162,7 @@ describe('POST /users/', () => {
       roleId: "1"
     }
     const response = await supertest(app.app)
-        .post('/users/')
+        .post('/api/users/')
         .send(request);
 
     const request2 = {
@@ -174,7 +174,7 @@ describe('POST /users/', () => {
       refReferral: response.body.data.referral
     }
     await supertest(app.app)
-      .post('/users/')
+      .post('/api/users/')
       .send(request2);
 
     const request3 = {
@@ -186,7 +186,7 @@ describe('POST /users/', () => {
       refReferral: response.body.data.referral
     }
     await supertest(app.app)
-      .post('/users/')
+      .post('/api/users/')
       .send(request3);
 
     const voucherUser1 = await VoucherTestHelper.getByUserId(response.body.data.id)

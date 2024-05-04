@@ -16,7 +16,7 @@ model User {
   lastName  String    @db.VarChar(50)
   email     String    @unique @db.VarChar(100)
   password  String    @db.VarChar(100)
-  referral  String?   @unique @db.VarChar(50)
+  referral  String?   @db.VarChar(50)
   createdAt DateTime  @default(now())
   updatedAt DateTime  @updatedAt
   roleId    Int

@@ -22,7 +22,7 @@ const Header = ({ auth }: { auth: { isAuth: boolean, session: JWTPayload | undef
     return () => {
       window.addEventListener('resize', () => setWidth(window.innerWidth))
     }
-  }, [auth.isAuth])
+  }, [auth, dispatch])
   return (
     <div className='fixed top-0 left-0 right-0 bg-white shadow-small shadow-slate-800 z-10'>
       <div className='container mx-auto py-3 px-4 flex justify-between items-center'>

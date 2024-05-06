@@ -100,7 +100,7 @@ describe('DELETE /api/auth/', () => {
     
     const response = await supertest(app.app)
         .delete('/api/auth/')
-        .set('token', 'Bearer ' + auth.body.data.token)
+        .send({id: auth.body.data.id})
 
     expect(response.status).toBe(200);
     expect(response.body.message).toBe('Succeed delete token');
@@ -110,24 +110,14 @@ describe('DELETE /api/auth/', () => {
     expect(user.token).toBeNull();
   })
 
-  it('should throw error, token invalid', async () => {
+  it('should throw error, id not found', async () => {
     const response = await supertest(app.app)
         .delete('/api/auth/')
-        .set('token', 'Bearer ' + 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6InVzZXItdXVpZHY0Iiwicm9sZSI6InVzZXIiLCJpYXQiOjE3MTM1ODYwMzEsImV4cCI6MTcxMzU4NjA5MX0.WJfQGVyqguQGSxJZCUbkbW6aPbpS_CDrjLdGvJuPe3U')
+        .send({id: 'adsd'})
 
-    expect(response.status).toBe(403);
+    console.log(response.body)
+    expect(response.status).toBe(400);
     expect(response.body.status).toBe('fail');
-    expect(response.body.message).toBe('Token is invalid');
-  })
-
-  it('should throw error unauthorized, token null', async () => {
-    const response = await supertest(app.app)
-        .delete('/api/auth/')
-        .set('token', 'Bearer ' + '')
-
-    expect(response.status).toBe(401);
-    expect(response.body.status).toBe('fail');
-    expect(response.body.message).toBe('Unauthorized');
   })
 
 })

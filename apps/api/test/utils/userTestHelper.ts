@@ -29,7 +29,7 @@ export class UserTestHelper {
   }
 
   static async delete() {
-    await prisma.user.deleteMany({})
+    await prisma.$queryRaw`DELETE FROM users WHERE email LIKE 'test%'`;
   }
 
 }

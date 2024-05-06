@@ -103,7 +103,7 @@ export class UserService {
 
   static async getUserIdByReferral(req: { referral: string }) : Promise<{ id: string }> {
     
-    const user = await prisma.user.findUnique({
+    const user = await prisma.user.findFirst({
       where: { 
         referral: req.referral
        }
@@ -115,7 +115,7 @@ export class UserService {
 
   static async verifyReferral(req: { referral: string }) : Promise<void> {
     
-    const isReferralValid = await prisma.user.findUnique({
+    const isReferralValid = await prisma.user.findFirst({
       where: { 
         referral: req.referral
        }

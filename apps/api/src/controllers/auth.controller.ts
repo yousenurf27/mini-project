@@ -32,7 +32,8 @@ export default class AuthController {
   async logout(req: UserRequest, res: Response, next: NextFunction) {
     try {
       
-      const reqUser = req.user as UpdateUserRequest;
+      const reqUser = req.body as UpdateUserRequest;
+      console.log(reqUser)
       await UserService.deleteUserToken(reqUser);
 
       res.status(200).send({

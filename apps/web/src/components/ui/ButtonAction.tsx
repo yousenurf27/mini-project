@@ -2,7 +2,7 @@ import { useFormStatus } from 'react-dom'
 import { motion } from 'framer-motion'
 import { Spinner } from '@nextui-org/react'
 
-const ButtonAction = () => {
+const ButtonAction = ({ title } : { title: string}) => {
   const { pending } = useFormStatus()
 
   return (
@@ -13,7 +13,7 @@ const ButtonAction = () => {
         whileTap={{ scale: .7 }}
         disabled={pending}
       >
-        {pending ? <Spinner color="success"/> : 'Sign Up'}
+        {pending ? <Spinner color="success"/> : title}
       </motion.button>
     </div>
   )

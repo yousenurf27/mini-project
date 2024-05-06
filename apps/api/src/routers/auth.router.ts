@@ -21,7 +21,6 @@ export default class AuthRouter {
     );
     this.router.delete(
       '/',
-      verifyToken,
       this.authController.logout
     )
   }

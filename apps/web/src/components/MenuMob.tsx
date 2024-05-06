@@ -1,4 +1,4 @@
-import { Variants, motion, useCycle } from 'framer-motion'
+import { motion, useCycle } from 'framer-motion'
 import Link from 'next/link';
 
 const Path = (props: any) => (

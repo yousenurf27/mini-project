@@ -1,4 +1,4 @@
-import { LoginUserRequest, UpdateUserRequest } from '@/model/user.model';
+import { LoginUserRequest, UpdateUserRequest, UserResponse, toPayloadToken } from '@/model/user.model';
 import { UserService } from '@/services/user.service';
 import TokenManager from '@/tokenize/tokenManager';
 import { UserRequest } from '@/type/userRequest';
@@ -12,7 +12,7 @@ export default class AuthController {
 
       const request = req.body as LoginUserRequest;
       const user = await UserService.getUserByEmail(request);
-      user.token = TokenManager.generateToken({ id: user.id, role: user.role.name });
+      user.token = TokenManager.generateToken(toPayloadToken(user));
       const newUser = await UserService.patchUserToken(user as UpdateUserRequest);
       newUser.role = user.role.name
       newUser.token = user.token

@@ -47,3 +47,14 @@ export type UpdateUserRequest = {
   id: string;
   token?: string;
 }
+
+export const toPayloadToken = (user : User) : UserResponse => {
+  return {
+    id: user.id,
+    firstName: user.firstName,
+    lastName: user.lastName,
+    email: user.email,
+    role: user.roleId == 1 ? 'user' : 'admin',
+    referral: user.referral ? user.referral : '',
+  }
+}

@@ -9,7 +9,7 @@ import { useAppDispatch } from '@/lib/hook';
 import { addAuth } from '@/lib/features/auth/authSlice';
 import UserMenu from './ui/UserMenu';
 
-const Header = ({ auth }: { auth: { isAuth: boolean, session: JWTPayload | undefined } }) => {
+const Header = ({ auth }: { auth: { isAuth: boolean, session: JWTPayload | undefined, token: string | undefined} }) => {
   const [ width, setWidth ] = useState<number>(0);
 
   const dispatch = useAppDispatch()

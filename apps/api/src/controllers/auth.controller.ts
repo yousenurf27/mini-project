@@ -33,7 +33,6 @@ export default class AuthController {
     try {
       
       const reqUser = req.body as UpdateUserRequest;
-      console.log(reqUser)
       await UserService.deleteUserToken(reqUser);
 
       res.status(200).send({

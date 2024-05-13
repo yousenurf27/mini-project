@@ -13,7 +13,7 @@ export class UserTestHelper {
         email: 'test@gmail.com',
         password: await bcrypt.hash('secret', 10),
         updatedAt: '2024-04-19T02:07:08.262Z',
-        roleId: 1
+        roleId: 2
       }
     })
   }

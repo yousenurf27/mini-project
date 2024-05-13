@@ -12,5 +12,5 @@ export const verifySession = async () => {
     isAuth = true
   }
 
-  return { isAuth: isAuth, session: session }
+  return { isAuth: isAuth, session: session, token: cookie }
 }

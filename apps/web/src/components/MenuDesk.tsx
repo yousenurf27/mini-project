@@ -14,7 +14,7 @@ const MenuDesk = ({ props }: { props: number }) => {
           whileHover={{ scale: 0.95 }}
           whileTap={{ scale: 0.7 }}
         >
-          <a className='block py-1 text-lg hover:text-emerald-500' href="#">Events</a>
+          <a className='block py-1 text-lg hover:text-emerald-500' href="/events">Events</a>
         </motion.li>
       </ul>
       { props > 767 && state.isAuth && <UserMenu /> }

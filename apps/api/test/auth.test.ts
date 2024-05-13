@@ -30,7 +30,7 @@ describe('POST /api/auth/', () => {
     expect(response.body.data.firstName).toBe('test');
     expect(response.body.data.lastName).toBe('test');
     expect(response.body.data.email).toBe(request.email);
-    expect(response.body.data.role).toBe('user' || 'admin');
+    expect(response.body.data.role).toBe('admin');
     expect(response.body.data.token).toBeDefined();
     expect(response.body.data.token.length).not.toBe(0);
   })

@@ -13,7 +13,7 @@ export const createUser = async (state: FormState, formData: FormData) => {
     lastName: formData.get('lastName'),
     email: formData.get('email'),
     password: formData.get('password'),
-    refReferral: formData.get('refReferral')
+    refReferral: formData.get('roleId') == '1' ? formData.get('refReferral') : ''
   })
 
   // If any form fields are invalid, return early

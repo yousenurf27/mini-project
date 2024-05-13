@@ -1,9 +1,19 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit'
 import { JWTPayload } from 'jose';
 
+interface PayloadUser {
+  id: string;
+  firstName: string;
+  lastName: string;
+  email: string;
+  referral: string;
+  role: string;
+}
+
 interface ValueState {
   isAuth: boolean;
-  session: JWTPayload | undefined
+  session: JWTPayload | PayloadUser | undefined;
+  token: string | undefined;
 }
 
 const initialState = {
@@ -17,7 +27,6 @@ export const authSlice = createSlice({
   initialState,
   reducers: {
     addAuth: (state, action: PayloadAction<ValueState>) => {
-      // console.log(action.payload)
       state.value = action.payload
     }
   },

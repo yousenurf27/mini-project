@@ -18,6 +18,10 @@ export async function createSession(token: string) {
   })
 }
 
+export async function getToken() {
+  return cookies().get('session')?.value;
+}
+
 export async function deleteSession() {
   cookies().delete('session')
 }

@@ -1,3 +1,4 @@
+import { useAppSelector } from '@/lib/hook';
 import { motion, useCycle } from 'framer-motion'
 import Link from 'next/link';
 
@@ -13,6 +14,8 @@ const Path = (props: any) => (
 
 const MenuMob = () => {
   const [ isOpen, toggleOpen ] = useCycle(false, true);
+  const state = useAppSelector((state) => state.auth.value)
+
   return (
     <motion.div
       className='flex items-baseline'
@@ -62,29 +65,39 @@ const MenuMob = () => {
             <motion.li
               whileTap={{ scale: .7 }}
             >
-              <Link className='w-full px-6 py-4 block text-lg font-medium text-center focus:text-emerald-500' href='/'>Events</Link>
+              <Link
+                className='w-full px-6 py-4 block text-lg font-medium text-center focus:text-emerald-500'
+                href='/events'
+                onClick={() => toggleOpen()}
+              >
+                Events
+              </Link>
             </motion.li>
           </ul>
-          <Link className='flex mb-4' href='/login'
-            onClick={() => toggleOpen()}
-          >
-            <motion.button
-              className='mx-10 flex-grow bg-transparent transition-all focus:bg-emerald-500 text-emerald-700 font-semibold focus:text-white py-2 px-4 border border-emerald-500 focus:border-transparent rounded-xl'
-              whileTap={{ scale: .7 }}
-            >
-              Log In
-            </motion.button>
-          </Link>
-          <Link className='flex' href='/signup'
-            onClick={() => toggleOpen()}
-          >
-            <motion.button
-              className='mx-10 flex-grow transition-all bg-emerald-500 hover:bg-emerald-700 text-white font-bold py-2 px-4 rounded-xl'
-              whileTap={{ scale: .7 }}
-            >
-              Sign Up
-            </motion.button>
-          </Link>
+          { !state.isAuth && (
+            <>
+              <Link className='flex mb-4' href='/login'
+                onClick={() => toggleOpen()}
+              >
+                <motion.button
+                  className='mx-10 flex-grow bg-transparent transition-all focus:bg-emerald-500 text-emerald-700 font-semibold focus:text-white py-2 px-4 border border-emerald-500 focus:border-transparent rounded-xl'
+                  whileTap={{ scale: .7 }}
+                >
+                  Log In
+                </motion.button>
+              </Link>
+              <Link className='flex' href='/signup'
+                onClick={() => toggleOpen()}
+              >
+                <motion.button
+                  className='mx-10 flex-grow transition-all bg-emerald-500 hover:bg-emerald-700 text-white font-bold py-2 px-4 rounded-xl'
+                  whileTap={{ scale: .7 }}
+                >
+                  Sign Up
+                </motion.button>
+              </Link>
+            </>
+          ) }
         </div>
       </motion.div>
     </motion.div>

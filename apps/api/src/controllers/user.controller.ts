@@ -1,6 +1,7 @@
 import { CreateUserRquest } from '@/model/user.model';
 import { UserService } from '@/services/user.service';
 import { VoucherService } from '@/services/voucher.service';
+import { UserRequest } from '@/type/userRequest';
 import { NextFunction, Request, Response } from 'express';
 
 export default class UserController {
@@ -32,6 +33,22 @@ export default class UserController {
 
       next(e);
 
+    }
+
+  }
+
+  async getVouchersByUserId(req: UserRequest, res: Response, next: NextFunction) {
+
+    try {
+      const id = req.user?.id!
+  
+      const vouchers = await VoucherService.getVouchersById({ userId: id });
+
+      res.status(200).send({
+        data: vouchers
+      });
+    } catch (e) {
+      next(e);
     }
 
   }

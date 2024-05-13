@@ -1,3 +1,5 @@
+import NotFoundError from '@/exceptions/NotFoundError';
+import { GetVouchersByUserIdRquest, toVouchersResponse } from '@/model/voucher.model';
 import prisma from '@/prisma';
 import { nextThreeMonths } from '@/utils/dateNextMonth';
 import { v4 as uuid } from 'uuid';
@@ -44,7 +46,7 @@ export class VoucherService {
     await prisma.voucher.create({
       data: {
         id: `voucher-${uuid()}`,
-        name: 'Points from used referral by someone',
+        name: 'Points from referral used by someone',
         type: 'point',
         points: 10000,
         updatedAt: new Date().toISOString(),
@@ -52,6 +54,20 @@ export class VoucherService {
         expAt: nextThreeMonths()
       }
     })
+
+  }
+
+  static async getVouchersById(req: GetVouchersByUserIdRquest) {
+
+    const vouchers = await prisma.voucher.findMany({
+      where: { userId: req.userId }
+    })
+
+    if(!vouchers) {
+      throw new NotFoundError('Voucher not found');
+    }
+
+    return toVouchersResponse(vouchers)
 
   }
 

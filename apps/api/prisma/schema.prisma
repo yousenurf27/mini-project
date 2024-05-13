@@ -53,11 +53,15 @@ model Voucher {
 
 model Event {
   id           String   @id @db.VarChar(100)
-  name         String   @db.Text
+  title        String   @db.Text
   desc         String   @db.Text
   start        DateTime
   lastRegister DateTime
   attendee     Int
+  image        String   @db.Text
+  price        Int
+  location     String   @db.VarChar(100)
+  type         String   @db.VarChar(50)
   userId       String   @db.VarChar(100)
   user         User     @relation(fields: [userId], references: [id])
 
